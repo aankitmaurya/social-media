@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from first_app.views import AboutUs, detail_view, HomeTemplate
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('about_us/', detail_view, name="about_us"),
-    path("accounts/", include("django.contrib.auth.urls")),
-    path("", HomeTemplate.as_view(), name="home"),
+    path("", include("social_app.urls")),
 ]
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
